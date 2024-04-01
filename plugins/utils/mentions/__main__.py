@@ -111,9 +111,7 @@ async def handle_mentions(msg: Message, is_retry=False):
         await client.send_message(
             chat_id=userge.id if userge.has_bot else config.LOG_CHANNEL_ID,
             text=text,
-            link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                ),
+            link_preview_options=LinkPreviewOptions(is_disabled=True),
             reply_markup=InlineKeyboardMarkup(buttons)
         )
     except (PeerIdInvalid, UserIsBlocked) as e:

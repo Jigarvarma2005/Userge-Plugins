@@ -35,9 +35,7 @@ async def cur_conv(message: Message):
             "<code>Oops!!get the API from</code> "
             "<a href='https://free.currencyconverterapi.com'>HERE</a> "
             "<code>& add it to Heroku config vars</code> (<code>CURRENCY_API</code>)",
-            link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                ),
+            link_preview_options=LinkPreviewOptions(is_disabled=True),
             parse_mode=enums.ParseMode.HTML, del_in=0)
         return
 

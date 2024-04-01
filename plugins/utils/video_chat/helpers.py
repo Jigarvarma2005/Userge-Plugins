@@ -7,6 +7,7 @@ from typing import Optional
 from pathlib import Path
 from traceback import format_exc
 
+from pyrogram.types import LinkPreviewOptions
 from pyrogram.raw.types import GroupCall
 from pyrogram.errors import (
     ChatAdminRequired,
@@ -21,7 +22,7 @@ from pytgcalls.types import (
     VideoParameters
 )
 from pytgcalls.exceptions import GroupCallNotFound, NotInGroupCallError
-from pyrogram.types import LinkPreviewOptions
+
 from userge import userge, Message, pool
 from userge.utils import is_url, time_formatter, progress
 from . import (
@@ -197,9 +198,7 @@ async def skip_song(clear_queue: bool = False):
         await Vars.CLIENT.send_message(
             Vars.CHAT_ID,
             out,
-            link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                )
+            link_preview_options=LinkPreviewOptions(is_disabled=True)
         )
         await skip_song()
 

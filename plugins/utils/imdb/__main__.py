@@ -43,9 +43,7 @@ async def _imdb(message: Message):
     if not (imdb.API_ONE_URL or imdb.API_TWO_URL):
         return await message.err(
             "First set [these two vars](https://t.me/UsergePlugins/127) before using imdb",
-            link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                )
+            link_preview_options=LinkPreviewOptions(is_disabled=True)
         )
     try:
         movie_name = message.input_str
@@ -79,9 +77,7 @@ async def _imdb(message: Message):
     else:
         await message.edit(
             description,
-            link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                ),
+            link_preview_options=LinkPreviewOptions(is_disabled=True),
             parse_mode=enums.ParseMode.HTML
         )
 

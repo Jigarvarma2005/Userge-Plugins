@@ -32,9 +32,7 @@ async def zippyshare(message: Message):
         await message.edit(f"**Original** : {url}\n**FileName** : `{fname}`\n"
                            f"**DirectLink** : {direct_url}\n\n"
                            "**[HINT]** : use `.download [directLink]`",
-                           link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                ))
+                           link_preview_options=LinkPreviewOptions(is_disabled=True))
     except Exception as z_e:  # pylint: disable=broad-except
         await message.edit(f"`{z_e}`")
 

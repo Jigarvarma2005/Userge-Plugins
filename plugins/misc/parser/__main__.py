@@ -148,9 +148,7 @@ async def gdtot(message: Message):
                 f'Date: {info[1].text.strip()}\n'
                 f'\nGDrive-URL:\n{gdrive_url}'
             )
-            await message.edit(out, link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                ))
+            await message.edit(out, link_preview_options=LinkPreviewOptions(is_disabled=True))
         except Exception:
             await message.err("Unable To parse Link")
 
@@ -179,6 +177,4 @@ async def appdrive(message: Message):
                 'Drive_Link: '
                 f'{res.get("gdrive_link", "Something Went Wrong")}'
             )
-            await message.edit(output, link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                ))
+            await message.edit(output, link_preview_options=LinkPreviewOptions(is_disabled=True))

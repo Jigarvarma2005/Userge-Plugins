@@ -300,9 +300,7 @@ After Adding a var, you can see your media when you start your Bot.
             mp.inline_keyboard.insert(0, btn)
             await cq.edit_message_text(
                 SETTINGS_TEXT,
-                link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                ),
+                link_preview_options=LinkPreviewOptions(is_disabled=True),
                 reply_markup=mp
             )
         elif cq.data == "en_dis_bot_pm":
@@ -321,9 +319,7 @@ After Adding a var, you can see your media when you start your Bot.
             mp = InlineKeyboardMarkup([[InlineKeyboardButton("Back", callback_data="stngs")]])
             await cq.edit_message_text(
                 HELP_TEXT,
-                link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                ),
+                link_preview_options=LinkPreviewOptions(is_disabled=True),
                 reply_markup=mp
             )
         elif cq.data == "stats":
@@ -344,9 +340,7 @@ After Adding a var, you can see your media when you start your Bot.
 """
             await cq.edit_message_text(
                 out_str,
-                link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                ),
+                link_preview_options=LinkPreviewOptions(is_disabled=True),
                 reply_markup=mp
             )
         elif cq.data == "broadcast":
@@ -375,27 +369,21 @@ After Adding a var, you can see your media when you start your Bot.
             )
             await cq.edit_message_text(
                 MISC_TEXT,
-                link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                ),
+                link_preview_options=LinkPreviewOptions(is_disabled=True),
                 reply_markup=mp
             )
         elif cq.data == "setmedia":
             mp = InlineKeyboardMarkup([[InlineKeyboardButton("Back", callback_data="misc")]])
             await cq.edit_message_text(
                 SET_MEDIA_TEXT,
-                link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                ),
+                link_preview_options=LinkPreviewOptions(is_disabled=True),
                 reply_markup=mp
             )
         elif cq.data == "settext":
             mp = InlineKeyboardMarkup([[InlineKeyboardButton("Back", callback_data="misc")]])
             await cq.edit_message_text(
                 SET_CUSTOM_TEXT,
-                link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                ),
+                link_preview_options=LinkPreviewOptions(is_disabled=True),
                 reply_markup=mp
             )
         elif cq.data == "startcq":
@@ -403,9 +391,7 @@ After Adding a var, you can see your media when you start your Bot.
             mp = InlineKeyboardMarkup([[InlineKeyboardButton("Settings", callback_data="stngs")]])
             await cq.edit_message_text(
                 START_TEXT.format_map(SafeDict(**user_dict)),
-                link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                ),
+                link_preview_options=LinkPreviewOptions(is_disabled=True),
                 reply_markup=mp
             )
 
@@ -413,9 +399,7 @@ After Adding a var, you can see your media when you start your Bot.
         msg: PyroMessage, text: str, path: str, markup: Optional[InlineKeyboardMarkup] = None
     ):
         if not path:
-            return await msg.reply(text, link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                ), reply_markup=markup)
+            return await msg.reply(text, link_preview_options=LinkPreviewOptions(is_disabled=True), reply_markup=markup)
         if path.lower().endswith((".jpg", ".jpeg", ".png", ".bmp")):
             await bot.send_photo(
                 chat_id=msg.chat.id,
@@ -503,9 +487,7 @@ After Adding a var, you can see your media when you start your Bot.
                 reply_id = _U_ID_F_M_ID.get(replied.id)
             try:
                 if msg.text:
-                    await bot.send_message(reply_id, msg.text, link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                ))
+                    await bot.send_message(reply_id, msg.text, link_preview_options=LinkPreviewOptions(is_disabled=True))
                 else:
                     await msg.copy(reply_id)
             except UserIsBlocked:

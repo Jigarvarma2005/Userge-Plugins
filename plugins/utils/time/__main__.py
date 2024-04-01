@@ -80,9 +80,7 @@ async def flag_checks(message: Message):
         "<code>Ex: America/Los_Angeles</code>")
     if 'list' in message.flags or 'l' in message.flags:
         LOG.debug("Time | FLAG = List: Giving TZ list...")
-        await message.edit(default_message, link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                ),
+        await message.edit(default_message, link_preview_options=LinkPreviewOptions(is_disabled=True),
                            parse_mode=enums.ParseMode.HTML, del_in=30)
         return None
 
@@ -97,9 +95,7 @@ async def flag_checks(message: Message):
         return country_input
     if not COUNTRY_CITY:
         LOG.debug("Time: No Config Set")
-        await message.edit(default_message, link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                ),
+        await message.edit(default_message, link_preview_options=LinkPreviewOptions(is_disabled=True),
                            parse_mode=enums.ParseMode.HTML, del_in=30)
         return None
 

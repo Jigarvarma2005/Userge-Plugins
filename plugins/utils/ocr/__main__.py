@@ -33,9 +33,7 @@ async def ocr_gen(message: Message):
             "<code>Oops!!get the OCR API from</code> "
             "<a href='https://eepurl.com/bOLOcf'>HERE</a> "
             "<code>& add it to Heroku config vars</code> (<code>OCR_SPACE_API_KEY</code>)",
-            link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                ),
+            link_preview_options=LinkPreviewOptions(is_disabled=True),
             parse_mode=enums.ParseMode.HTML, del_in=0)
         return
 

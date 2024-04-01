@@ -96,9 +96,7 @@ async def invite_link(message: Message):
                 await message.edit(
                     "**Invite link Generated Successfully for\n"
                     f"{chat_name}**\n[Click here to join]({link})",
-                    link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                ))
+                    link_preview_options=LinkPreviewOptions(is_disabled=True))
             else:
                 await message.err("Requirements doesn't met...")
         except Exception as e_f:

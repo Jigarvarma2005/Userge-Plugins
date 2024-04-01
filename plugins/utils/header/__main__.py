@@ -43,6 +43,4 @@ async def req_head(message: Message):
     for k, v in cd.headers.items():
         output += f"   🏷 __{k.lower()}__ : `{v}`\n\n"
     await message.edit_or_send_as_file(text=output, caption=link,
-                                       link_preview_options=LinkPreviewOptions(
-                    is_disabled=True
-                ))
+                                       link_preview_options=LinkPreviewOptions(is_disabled=True))
