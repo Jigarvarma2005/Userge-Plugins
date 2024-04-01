@@ -15,7 +15,7 @@
 import aiohttp
 from pyrogram import enums
 from userge import userge, Message
-
+from pyrogram.types import LinkPreviewOptions
 
 @userge.on_cmd(
     "iplook", about={

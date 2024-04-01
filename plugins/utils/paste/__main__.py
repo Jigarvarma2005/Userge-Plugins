@@ -11,7 +11,7 @@
 import os
 import re
 from typing import Optional, Dict
-
+from pyrogram.types import LinkPreviewOptions
 import aiofiles
 import aiohttp
 from aiohttp import client_exceptions

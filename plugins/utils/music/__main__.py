@@ -16,7 +16,7 @@ import os
 
 from Python_ARQ import ARQ
 from aiohttp import ClientSession
-
+from pyrogram.types import LinkPreviewOptions
 from userge import config, Message, userge
 from .. import music
 from ...misc.download import url_download

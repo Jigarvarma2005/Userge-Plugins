@@ -20,7 +20,8 @@ from pyrogram.types import (
     InlineQueryResultArticle,
     InputTextMessageContent,
     InlineKeyboardButton,
-    InlineKeyboardMarkup
+    InlineKeyboardMarkup,
+    LinkPreviewOptions
 )
 from pyrogram import enums
 

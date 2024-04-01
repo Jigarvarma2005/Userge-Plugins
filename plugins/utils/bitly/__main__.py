@@ -12,7 +12,7 @@
 
 import gdshortener
 from pyrogram.errors import YouBlockedUser
-
+from pyrogram.types import LinkPreviewOptions
 from userge import userge, Message
 from userge.utils.exceptions import StopConversation
 

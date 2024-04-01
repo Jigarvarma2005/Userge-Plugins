@@ -11,7 +11,7 @@
 import os
 
 from pyrogram import enums
-
+from pyrogram.types import LinkPreviewOptions
 from userge import userge, Message, config
 from .. import ocr
 

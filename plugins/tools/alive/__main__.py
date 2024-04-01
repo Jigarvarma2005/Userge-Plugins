@@ -18,7 +18,7 @@ from pyrogram.errors import (
     ChatSendMediaForbidden, Forbidden, SlowmodeWait, PeerIdInvalid,
     FileIdInvalid, FileReferenceEmpty, BadRequest, ChannelInvalid, MediaEmpty
 )
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, LinkPreviewOptions
 
 from userge import userge, Message, pool, config, versions as ver, logging
 from userge.utils import get_file_id_of_media, get_custom_import_re

@@ -15,7 +15,7 @@ import aiohttp
 from pytz import country_timezones as c_tz, timezone as tz, country_names as c_n
 
 from pyrogram import enums
-
+from pyrogram.types import LinkPreviewOptions
 from userge import userge, Message
 from .. import weather
 

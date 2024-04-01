@@ -9,7 +9,7 @@
 # All rights reserved.
 
 import requests
-
+from pyrogram.types import LinkPreviewOptions
 from userge import userge, Message
 
 

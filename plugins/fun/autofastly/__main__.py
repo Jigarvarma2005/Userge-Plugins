@@ -13,7 +13,7 @@
 import os
 
 from pyrogram import enums
-
+from pyrogram.types import LinkPreviewOptions
 from userge import userge, Message, filters, config, get_collection
 from ...utils import ocr
 

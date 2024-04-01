@@ -11,7 +11,7 @@
 # Author: Fayas (https://github.com/FayasNoushad) (@FayasNoushad)
 
 from countryinfo import CountryInfo
-
+from pyrogram.types import LinkPreviewOptions
 from userge import userge, Message
 
 PREVIEW = False  # False for instant view

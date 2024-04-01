@@ -15,7 +15,7 @@
 import re
 
 import requests
-
+from pyrogram.types import LinkPreviewOptions
 from userge import userge, Message, pool
 
 

@@ -14,7 +14,7 @@
 
 import aiohttp
 import bs4
-
+from pyrogram.types import LinkPreviewOptions
 from userge import userge, Message
 
 

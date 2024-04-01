@@ -13,7 +13,7 @@
 
 import os
 from datetime import datetime
-
+from pyrogram.types import LinkPreviewOptions
 from removebg import RemoveBg
 
 from pyrogram import enums

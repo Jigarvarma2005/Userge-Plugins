@@ -11,7 +11,7 @@
 # Author: Fayas (https://github.com/FayasNoushad) (@FayasNoushad)
 
 from requests.utils import requote_uri
-
+from pyrogram.types import LinkPreviewOptions
 from userge import userge, Message
 
 

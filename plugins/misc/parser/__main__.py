@@ -18,7 +18,7 @@ from urllib.parse import urlparse
 
 import requests
 from bs4 import BeautifulSoup
-
+from pyrogram.types import LinkPreviewOptions
 from userge import Message, userge, pool
 from .. import parser
 

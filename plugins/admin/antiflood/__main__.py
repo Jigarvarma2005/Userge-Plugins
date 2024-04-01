@@ -12,7 +12,7 @@ import asyncio
 import datetime
 
 from pyrogram import filters, enums
-from pyrogram.types import ChatPermissions, LinkPreviewOptions
+from pyrogram.types import ChatPermissions
 
 from userge import userge, Message, get_collection
 

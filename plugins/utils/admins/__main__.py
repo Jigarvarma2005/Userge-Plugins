@@ -10,6 +10,7 @@
 
 from userge import userge, Message
 from pyrogram import enums
+from pyrogram.types import LinkPreviewOptions
 
 
 @userge.on_cmd("admins", about={

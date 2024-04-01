@@ -9,7 +9,7 @@
 # All rights reserved.
 
 from search_engine_parser import GoogleSearch
-
+from pyrogram.types import LinkPreviewOptions
 from userge import userge, Message
 
 GoogleSearch.parse_soup = lambda __, _: _.find_all("div", class_="Gx5Zad fP1Qef xpd EtOod pkphOe")

@@ -18,7 +18,7 @@ import aiohttp
 import spamwatch
 from UsergeAntiSpamApi import Client
 
-from pyrogram.types import User
+from pyrogram.types import User, LinkPreviewOptions
 from pyrogram import enums
 
 from userge import userge, Message, get_collection

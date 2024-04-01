@@ -3,7 +3,8 @@ import re
 from pyrogram.types import (InlineKeyboardMarkup,
                             InlineKeyboardButton,
                             CallbackQuery,
-                            Message as RawMessage)
+                            Message as RawMessage,
+                            LinkPreviewOptions)
 from pyrogram.errors import MessageNotModified, QueryIdInvalid
 
 from userge import userge, filters, config

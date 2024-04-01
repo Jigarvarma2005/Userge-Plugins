@@ -11,7 +11,7 @@
 import wikipedia
 
 from userge import userge, Message
-
+from pyrogram.types import LinkPreviewOptions
 
 @userge.on_cmd("wiki", about={
     'header': "do a Wikipedia search",

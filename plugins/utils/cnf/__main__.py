@@ -13,7 +13,7 @@
 
 import aiohttp
 from bs4 import BeautifulSoup
-
+from pyrogram.types import LinkPreviewOptions
 from userge import userge, Message
 
 

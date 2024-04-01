@@ -15,7 +15,7 @@ from pathlib import Path
 
 import deezloader  # pylint: disable=W0406
 from deezloader.exceptions import NoDataApi
-
+from pyrogram.types import LinkPreviewOptions
 from userge import userge, Message, pool
 from . import ARL_TOKEN
 from ..upload import doc_upload, audio_upload

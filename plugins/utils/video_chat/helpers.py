@@ -21,7 +21,7 @@ from pytgcalls.types import (
     VideoParameters
 )
 from pytgcalls.exceptions import GroupCallNotFound, NotInGroupCallError
-
+from pyrogram.types import LinkPreviewOptions
 from userge import userge, Message, pool
 from userge.utils import is_url, time_formatter, progress
 from . import (
