@@ -20,7 +20,7 @@ from pyrogram import enums
 from pyrogram.errors import (
     ChatWriteForbidden, ChannelPrivate, UserNotParticipant, ChatIdInvalid
 )
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, LinkPreviewOptions
 
 from userge import userge, Message, config, logging, get_collection, pool
 from userge.utils.exceptions import UsergeBotNotFound
@@ -108,7 +108,7 @@ async def send_new_post(entries):
     else:
         args = {
             'text': out_str,
-            'disable_web_page_preview': True,
+            'link_preview_options': LinkPreviewOptions(is_disabled=True),
             'parse_mode': enums.ParseMode.MARKDOWN,
             'reply_markup': markup if userge.has_bot else None
         }

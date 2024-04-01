@@ -37,7 +37,9 @@ async def bitly(msg: Message):
             shorten_url = (
                 await conv.get_response(mark_read=True)
             ).text.split('\n', maxsplit=1)[-1]
-            await msg.edit(f"`{shorten_url}`", disable_web_page_preview=True)
+            await msg.edit(f"`{shorten_url}`", link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ))
     except StopConversation:
         await msg.err("bot is down")
 
@@ -58,7 +60,9 @@ async def is_gd(msg: Message):
     else:
         await msg.edit(
             f"**Shortened URL:**\n`{s_url}`\n\n**Stats:** `{stats}`",
-            disable_web_page_preview=True
+            link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                )
         )
 
 
@@ -78,5 +82,7 @@ async def stats_is_gd(msg: Message):
     else:
         await msg.edit(
             f"**URL:** `{original_url}`",
-            disable_web_page_preview=True
+            link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                )
         )

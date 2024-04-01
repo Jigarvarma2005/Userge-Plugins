@@ -13,7 +13,7 @@ import os
 from datetime import datetime
 
 import aiofiles
-
+from pyrogram.types import ReplyParameters
 from userge import userge, Message, get_collection
 from userge.utils import progress
 from .. import thumbnail
@@ -81,7 +81,7 @@ async def get_thumb_nail(message: Message):
         msg = await message.client.send_document(chat_id=message.chat.id,
                                                  document=thumbnail.Dynamic.THUMB_PATH,
                                                  disable_notification=True,
-                                                 reply_to_message_id=message.id)
+                                                 reply_parameters=ReplyParameters(message_id=message.id))
         await CHANNEL.fwd_msg(msg)
         await message.delete()
     else:

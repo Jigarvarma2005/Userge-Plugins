@@ -11,7 +11,7 @@
 # By @Krishna_Singhal
 
 from pyrogram.errors import BadRequest, ChannelInvalid, UserIsBot
-
+from pyrogram.types import ReplyParameters
 from userge import userge, config, Message
 from userge.utils import parse_buttons as pb, get_file_id_of_media
 
@@ -69,13 +69,13 @@ async def create_button(msg: Message):
                 chat_id=msg.chat.id,
                 file_id=file_id,
                 caption=text,
-                reply_to_message_id=message_id,
+                reply_parameters=ReplyParameters(message_id=message_id),
                 reply_markup=markup)
         else:
             await client.send_message(
                 chat_id=msg.chat.id,
                 text=text,
-                reply_to_message_id=message_id,
+                reply_parameters=ReplyParameters(message_id=message_id),
                 reply_markup=markup)
     except UserIsBot:
         await msg.err("oops, your Bot is not here to send Msg!")

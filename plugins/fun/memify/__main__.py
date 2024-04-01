@@ -12,6 +12,7 @@ import os
 import textwrap
 
 from PIL import Image, ImageFont, ImageDraw
+from pyrogram.types import ReplyParameters
 
 from userge import userge, Message, config
 from userge.utils import progress, take_screen_shot, runcmd
@@ -66,7 +67,7 @@ async def memify(message: Message):
     webp_file = await draw_meme_text(dls_loc, message.input_str)
     await message.client.send_sticker(chat_id=message.chat.id,
                                       sticker=webp_file,
-                                      reply_to_message_id=replied.id)
+                                      reply_parameters=ReplyParameters(message_id=replied.id))
     await message.delete()
     os.remove(webp_file)
 

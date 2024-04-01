@@ -52,7 +52,9 @@ async def weather_get(message: Message):
             "<code>Oops!!get the API from</code> "
             "<a href='https://openweathermap.org'>HERE</a> "
             "<code>& add it to Heroku config vars</code> (<code>OPEN_WEATHER_MAP</code>)",
-            disable_web_page_preview=True,
+            link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ),
             parse_mode=enums.ParseMode.HTML, del_in=0)
         return
 

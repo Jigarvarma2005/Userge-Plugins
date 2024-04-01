@@ -16,7 +16,7 @@ import requests
 from PIL import Image
 from emoji import get_emoji_regexp
 from validators.url import url
-
+from pyrogram.types import ReplyParameters
 from userge import userge, config, Message
 
 CONVERTED_IMG = config.Dynamic.DOWN_PATH + "img.png"
@@ -136,6 +136,6 @@ async def _tweets(msg: Message, text: str, username: str = '', type_: str = "twe
     msg_id = msg.reply_to_message.id if msg.reply_to_message else None
     await msg.client.send_photo(chat_id=msg.chat.id,
                                 photo=CONVERTED_IMG,
-                                reply_to_message_id=msg_id)
+                                reply_parameters=ReplyParameters(message_id=msg_id))
     os.remove(tmp_file)
     os.remove(CONVERTED_IMG)

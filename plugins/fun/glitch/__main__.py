@@ -14,7 +14,7 @@ import os
 
 from PIL import Image
 from glitch_this import ImageGlitcher
-
+from pyrogram.types import ReplyParameters
 from userge import userge, Message, config
 from userge.utils import take_screen_shot, runcmd
 
@@ -89,7 +89,8 @@ async def glitch_(message: Message):
         await message.client.send_sticker(
             message.chat.id,
             glitched,
-            reply_to_message_id=message_id)
+            reply_parameters=ReplyParameters(message_id=message_id)
+            )
         os.remove(glitched)
         await message.delete()
     else:
@@ -106,7 +107,8 @@ async def glitch_(message: Message):
         await message.client.send_animation(
             message.chat.id,
             Glitched,
-            reply_to_message_id=message_id)
+            reply_parameters=ReplyParameters(message_id=message_id)
+            )
         os.remove(Glitched)
         await message.delete()
     for files in (dls_loc, glitch_file):

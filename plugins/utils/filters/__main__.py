@@ -10,7 +10,7 @@
 
 import asyncio
 from typing import Dict
-
+from pyrogram.types import ReplyParameters
 from userge import userge, Message, filters, get_collection
 
 FILTERS_COLLECTION = get_collection("filters")
@@ -48,7 +48,7 @@ def _get_filters_for_chat(chat_id: int) -> str:
         for name, mid in FILTERS_DATA[chat_id].items():
             if not isinstance(mid, int):
                 continue
-            out += " 🔍 `{}` , {}\n".format(name, CHANNEL.get_link(mid))
+            out += f" 🔍 `{name}` , {CHANNEL.get_link(mid)}\n"
     return out
 
 
@@ -116,7 +116,7 @@ async def delete_filters(message: Message) -> None:
         out = "`Wrong syntax`\nNo arguements"
     elif await FILTERS_COLLECTION.find_one_and_delete(
             {'chat_id': message.chat.id, 'name': filter_}):
-        out = "`Successfully deleted filter:` **{}**".format(filter_)
+        out = f"`Successfully deleted filter:` **{filter_}**"
         _filter_deleter(message.chat.id, filter_)
     else:
         out = "`Couldn't find filter:` **{}**".format(filter_)
@@ -193,6 +193,6 @@ async def chat_filter(message: Message) -> None:
                                              message_id=FILTERS_DATA[message.chat.id][name],
                                              chat_id=message.chat.id,
                                              user_id=message.from_user.id,
-                                             reply_to_message_id=message.id)
+                                             reply_parameters=ReplyParameters(message_id=message.id))
     except RuntimeError:
         pass

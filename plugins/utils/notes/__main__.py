@@ -10,7 +10,7 @@
 
 import asyncio
 from typing import Dict, Tuple
-
+from pyrogram.types import ReplyParameters
 from userge import userge, Message, get_collection, config
 from ...builtin import sudo
 
@@ -195,7 +195,7 @@ async def get_note(message: Message) -> None:
                                      message_id=mid,
                                      chat_id=message.chat.id,
                                      user_id=user_id,
-                                     reply_to_message_id=reply_to_message_id)
+                                     reply_parameters=ReplyParameters(message_id=reply_to_message_id))
 
 
 @userge.on_cmd(

@@ -21,7 +21,7 @@ from json import dumps
 from mimetypes import guess_type
 from typing import Optional
 from urllib.parse import quote, urlparse, parse_qs
-
+from pyrogram.types import LinkPreviewOptions
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload, MediaIoBaseDownload
@@ -621,7 +621,9 @@ class Worker(_GDrive):
             reply_string += "send back "
             reply_string += "<code>.gconf [auth_code or url]</code>"
             await self._message.edit(
-                text=reply_string, disable_web_page_preview=True)
+                text=reply_string, link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ))
 
     async def confirm_setup(self) -> None:
         """ Finalize GDrive setup """
@@ -678,7 +680,9 @@ class Worker(_GDrive):
             await self._message.err(h_e._get_reason())  # pylint: disable=protected-access
             return
         await self._message.edit(f"**Shareable Links**\n\n{out}",
-                                 disable_web_page_preview=True, log=__name__)
+                                 link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ), log=__name__)
 
     @creds_dec
     async def search(self) -> None:
@@ -692,7 +696,9 @@ class Worker(_GDrive):
             await self._message.err(h_e._get_reason())  # pylint: disable=protected-access
             return
         await self._message.edit_or_send_as_file(
-            out, disable_web_page_preview=True,
+            out, link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ),
             caption=f"search results for `{self._message.filtered_input_str}`")
 
     @creds_dec
@@ -711,7 +717,9 @@ class Worker(_GDrive):
             await self._message.err(h_e._get_reason())  # pylint: disable=protected-access
             return
         await self._message.edit(f"**Folder Created Successfully**\n\n{out}",
-                                 disable_web_page_preview=True, log=__name__)
+                                 link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ), log=__name__)
 
     @creds_dec
     async def list_folder(self) -> None:
@@ -732,7 +740,9 @@ class Worker(_GDrive):
             await self._message.err(h_e._get_reason())  # pylint: disable=protected-access
             return
         await self._message.edit_or_send_as_file(
-            out, disable_web_page_preview=True, caption=f"list results for `{file_id}`")
+            out, link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ), caption=f"list results for `{file_id}`")
 
     @creds_dec
     async def upload(self) -> None:
@@ -758,7 +768,7 @@ class Worker(_GDrive):
             except Exception as e_e:
                 await self._message.err(str(e_e))
                 return
-        file_path = dl_loc if dl_loc else self._message.input_str
+        file_path = dl_loc or self._message.input_str
         if not os.path.exists(file_path):
             await self._message.err("invalid file path provided?")
             return
@@ -787,7 +797,9 @@ class Worker(_GDrive):
             out = self._output
         else:
             out = "`failed to upload.. check logs?`"
-        await self._message.edit(out, disable_web_page_preview=True, log=__name__)
+        await self._message.edit(out, link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ), log=__name__)
 
     @creds_dec
     async def download(self) -> None:
@@ -811,7 +823,9 @@ class Worker(_GDrive):
             out = self._output
         else:
             out = "`failed to download.. check logs?`"
-        await self._message.edit(out, disable_web_page_preview=True, log=__name__)
+        await self._message.edit(out, link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ), log=__name__)
 
     @creds_dec
     async def copy(self) -> None:
@@ -838,7 +852,9 @@ class Worker(_GDrive):
             out = self._output
         else:
             out = "`failed to copy.. check logs?`"
-        await self._message.edit(out, disable_web_page_preview=True, log=__name__)
+        await self._message.edit(out, link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ), log=__name__)
 
     @creds_dec
     async def move(self) -> None:
@@ -897,7 +913,9 @@ class Worker(_GDrive):
             return
         out = f"**I Found these Details for** `{file_id}`\n\n{meta_data}"
         await self._message.edit_or_send_as_file(
-            out, disable_web_page_preview=True,
+            out, link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ),
             caption=f"metadata for `{file_id}`")
 
     @creds_dec
@@ -913,7 +931,9 @@ class Worker(_GDrive):
             return
         out = f"**I Found these Permissions for** `{file_id}`\n\n{out}"
         await self._message.edit_or_send_as_file(
-            out, disable_web_page_preview=True,
+            out, link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ),
             caption=f"view perm results for `{file_id}`")
 
     @creds_dec
@@ -928,7 +948,9 @@ class Worker(_GDrive):
             await self._message.err(h_e._get_reason())  # pylint: disable=protected-access
         else:
             out = f"**Set Permissions successfully for** `{file_id}`\n\n{link}"
-            await self._message.edit(out, disable_web_page_preview=True)
+            await self._message.edit(out, link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ))
 
     @creds_dec
     async def del_perms(self) -> None:
@@ -943,7 +965,9 @@ class Worker(_GDrive):
             return
         out = f"**Removed These Permissions successfully from** `{file_id}`\n\n{out}"
         await self._message.edit_or_send_as_file(
-            out, disable_web_page_preview=True,
+            out, link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ),
             caption=f"removed perm results for `{file_id}`")
 
 
@@ -960,7 +984,9 @@ async def gsetup_(message: Message):
     else:
         await message.edit(
             "`G_DRIVE_CLIENT_ID` and `G_DRIVE_CLIENT_SECRET` not found!\n"
-            f"[Read this]({link}) to know more.", disable_web_page_preview=True)
+            f"[Read this]({link}) to know more.", link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ))
 
 
 @userge.on_cmd("gconf", about={

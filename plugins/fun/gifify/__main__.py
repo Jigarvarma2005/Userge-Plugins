@@ -13,6 +13,7 @@
 import os
 
 import lottie
+from pyrogram.types import ReplyParameters
 
 from userge import userge, Message, config, pool
 
@@ -51,7 +52,8 @@ async def gifify(msg: Message):
         msg.chat.id,
         converted_gif,
         unsave=True,
-        reply_to_message_id=replied.id)
+        reply_params=ReplyParameters(message_id=replied.id),
+    )
     await msg.delete()
     os.remove(converted_gif)
 

@@ -39,7 +39,9 @@ async def vc_callback(cq: CallbackQuery):
                     CQ_MSG.pop(i)
                     break
 
-        await cq.edit_message_text(text, disable_web_page_preview=True)
+        await cq.edit_message_text(text, link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ))
         await skip_song()
 
     elif "queue" in cq.data:
@@ -67,7 +69,9 @@ async def vc_callback(cq: CallbackQuery):
 
         await cq.edit_message_text(
             out,
-            disable_web_page_preview=True,
+            link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ),
             reply_markup=button
         )
 
@@ -75,7 +79,9 @@ async def vc_callback(cq: CallbackQuery):
         if Vars.BACK_BUTTON_TEXT:
             await cq.edit_message_text(
                 Vars.BACK_BUTTON_TEXT,
-                disable_web_page_preview=True,
+                link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ),
                 reply_markup=default_markup()
             )
         else:

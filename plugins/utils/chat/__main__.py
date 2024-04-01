@@ -23,7 +23,7 @@ from pyrogram.errors.exceptions.bad_request_400 import (
     UsernameNotOccupied,
     PeerIdInvalid)
 from pyrogram import enums
-
+from pyrogram.types import LinkPreviewOptions, ReplyParameters
 from userge import userge, config, Message
 
 LOG = userge.getLogger(__name__)
@@ -96,7 +96,9 @@ async def invite_link(message: Message):
                 await message.edit(
                     "**Invite link Generated Successfully for\n"
                     f"{chat_name}**\n[Click here to join]({link})",
-                    disable_web_page_preview=True)
+                    link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ))
             else:
                 await message.err("Requirements doesn't met...")
         except Exception as e_f:
@@ -138,7 +140,7 @@ async def tagall_(message: Message):
                     text += f"[{f_name}](tg://user?id={u_id}) "
     except Exception as e:
         text += " " + str(e)
-    await message.client.send_message(c_id, text, reply_to_message_id=message_id)
+    await message.client.send_message(c_id, text, reply_parameters=ReplyParameters(message_id=message_id))
     await message.edit("```\nTagged recent Members Successfully...```", del_in=3)
 
 
@@ -163,7 +165,7 @@ async def stagall_(message: Message):
             text += mention_html(members.user.id, "\u200b")
     await message.delete()
     await userge.send_message(
-        chat_id, text, reply_to_message_id=message_id)
+        chat_id, text, reply_parameters=ReplyParameters(message_id=message_id))
 
 
 @userge.on_cmd("tadmins", about={
@@ -201,7 +203,7 @@ async def tadmins_(message: Message):
                     text += f"[{f_name}](tg://user?id={u_id}) "
     except Exception as e:
         text += " " + str(e)
-    await message.client.send_message(c_id, text, reply_to_message_id=message_id)
+    await message.client.send_message(c_id, text, reply_parameters=ReplyParameters(message_id=message_id))
     await message.edit("```\nAdmins tagged Successfully...```", del_in=3)
 
 

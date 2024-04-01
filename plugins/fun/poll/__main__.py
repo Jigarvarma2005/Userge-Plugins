@@ -13,7 +13,7 @@
 import random
 
 from userge import userge, Message
-
+from pyrogram.types import ReplyParameters
 
 @userge.on_cmd("poll", about={
     'header': "Create Poll of Suggestion to get opinion",
@@ -35,7 +35,7 @@ async def create_poll(msg: Message):
             question=query,
             options=options,
             is_anonymous=anonymous,
-            reply_to_message_id=msg_id)
+            reply_parameters=ReplyParameters(message_id=msg_id))
     else:
         query = "Do you agree with that Suggestion..?"
         await userge.send_poll(

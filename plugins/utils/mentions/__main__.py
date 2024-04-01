@@ -10,7 +10,7 @@
 
 import os
 from pyrogram.errors import PeerIdInvalid, BadRequest, UserIsBlocked
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, LinkPreviewOptions
 from pyrogram import enums
 
 from userge import userge, Message, config, filters, get_collection
@@ -35,10 +35,7 @@ async def _init():
 async def toggle_mentions(msg: Message):
     """ toggle mentions """
     global TOGGLE  # pylint: disable=global-statement
-    if TOGGLE:
-        TOGGLE = False
-    else:
-        TOGGLE = True
+    TOGGLE = not TOGGLE
     await SAVED_SETTINGS.update_one(
         {"_id": "MENTION_TOGGLE"}, {"$set": {"data": TOGGLE}}, upsert=True
     )
@@ -49,6 +46,7 @@ async def toggle_mentions(msg: Message):
     ~filters.me & ~filters.bot & ~filters.service
     & (filters.mentioned | filters.private), group=1, allow_via_bot=False)
 async def handle_mentions(msg: Message, is_retry=False):
+    # sourcery skip: low-code-quality
 
     if TOGGLE is False:
         return
@@ -67,7 +65,7 @@ async def handle_mentions(msg: Message, is_retry=False):
         else:
             link = msg.link
         text = f"{msg.from_user.mention} 💻 tagged you in **{msg.chat.title}.**"
-    text += f"\n\n[Message]({link}):" if not userge.has_bot else "\n\n**Message:**"
+    text += "\n\n**Message:**" if userge.has_bot else f"\n\n[Message]({link}):"
     if msg.text:
         text += f"\n`{msg.text}`"
     buttons = [[InlineKeyboardButton(text="📃 Message Link", url=link)]]
@@ -113,17 +111,18 @@ async def handle_mentions(msg: Message, is_retry=False):
         await client.send_message(
             chat_id=userge.id if userge.has_bot else config.LOG_CHANNEL_ID,
             text=text,
-            disable_web_page_preview=True,
+            link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ),
             reply_markup=InlineKeyboardMarkup(buttons)
         )
     except (PeerIdInvalid, UserIsBlocked) as e:
-        if userge.dual_mode and not is_retry:
-            if isinstance(e, UserIsBlocked):
-                await userge.unblock_user(userge.bot.id)
-            await userge.send_message(userge.bot.id, "/start")
-            await handle_mentions(msg, True)
-        else:
+        if not userge.dual_mode or is_retry:
             raise
+        if isinstance(e, UserIsBlocked):
+            await userge.unblock_user(userge.bot.id)
+        await userge.send_message(userge.bot.id, "/start")
+        await handle_mentions(msg, True)
     finally:
         if dl_loc and os.path.exists(dl_loc):
             os.remove(dl_loc)

@@ -12,6 +12,7 @@ import os
 import random
 
 from PIL import Image, ImageEnhance, ImageOps
+from pyrogram.types import ReplyParameters
 from pyrogram.errors.exceptions.bad_request_400 import YouBlockedUser
 
 from userge import userge, Message, config
@@ -75,7 +76,7 @@ async def deepfryer(message: Message):
 
     await message.client.send_photo(chat_id=message.chat.id,
                                     photo=fried_file,
-                                    reply_to_message_id=replied.id)
+                                    reply_parameters=ReplyParameters(message_id=replied.id))
     await message.delete()
     os.remove(fried_file)
 
@@ -195,7 +196,7 @@ async def fry_(message: Message):
         await userge.send_message(
             chat,
             f"/deepfry {args}",
-            reply_to_message_id=media.id,
+            reply_parameters=ReplyParameters(message_id=media.id),
         )
         response = await conv.get_response(mark_read=True)
         if not response.photo:
@@ -213,7 +214,7 @@ async def fry_(message: Message):
             await message.client.send_sticker(
                 message.chat.id,
                 sticker=deep_fry,
-                reply_to_message_id=message_id,
+                reply_parameters=ReplyParameters(message_id=message_id)
             )
     await message.delete()
     for garb in (dls_loc, frying_file, deep_fry):

@@ -18,7 +18,7 @@ from typing import Tuple
 from aiohttp import ClientSession
 from pydub import AudioSegment
 from pydub.exceptions import CouldntDecodeError
-
+from pyrogram.types import ReplyParameters
 from userge import userge, Message, config
 from userge.utils import is_url
 from userge.utils.exceptions import ProcessCanceled
@@ -199,5 +199,5 @@ async def stt_(message: Message):
                 await sleep(2)
     # send transcription text file
     await message.client.send_as_file(
-        chat_id=message.chat.id, reply_to_message_id=message_id,
+        chat_id=message.chat.id, reply_parameters=ReplyParameters(message_id=message_id),
         text=api.text, filename=f"{file_name}_{lang}_transcription.txt")

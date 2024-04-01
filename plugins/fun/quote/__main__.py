@@ -11,6 +11,7 @@
 import asyncio
 
 from pyrogram.errors.exceptions.bad_request_400 import YouBlockedUser
+from pyrogram.types import ReplyParameters
 
 from userge import userge, Message
 
@@ -42,4 +43,4 @@ async def quotecmd(message: Message):
             message_id = replied.id if replied else None
             await userge.send_sticker(chat_id=message.chat.id,
                                       sticker=quote.sticker.file_id,
-                                      reply_to_message_id=message_id)
+                                      reply_parameters=ReplyParameters(message_id=message_id))

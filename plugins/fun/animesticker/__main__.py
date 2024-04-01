@@ -11,7 +11,7 @@
 # By @Krishna_Singhal
 
 import random
-
+from pyrogram.types import ReplyParameters
 from emoji import get_emoji_regexp
 
 from userge import userge, Message
@@ -35,7 +35,7 @@ async def anime_sticker(message: Message):
     if args:
         text = args
     elif replied:
-        text = args if args else replied.text
+        text = args or replied.text
     else:
         await message.err("Input not found!")
         return
@@ -77,7 +77,8 @@ async def anime_sticker(message: Message):
         await userge.send_sticker(
             chat_id=message.chat.id,
             sticker=str(saved.sticker.file_id),
-            reply_to_message_id=message_id
+            reply_parameters=ReplyParameters(
+                message_id=message_id) if message_id else None,
         )
         await saved.delete()
     except IndexError:

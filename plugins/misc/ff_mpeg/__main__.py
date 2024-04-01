@@ -24,6 +24,7 @@ from ffmpeg._utils import convert_kwargs_to_cmd_line_args
 from userge import userge, Message, config
 from userge.utils import humanbytes, is_url
 from ..download import tg_download, url_download
+from pyrogram.types import ReplyParameters
 
 FF_MPEG_DOWN_LOAD_MEDIA_PATH = Path(f"{config.Dynamic.DOWN_PATH.rstrip('/')}/userge.media.ffmpeg")
 
@@ -138,7 +139,7 @@ async def encode_x256(message: Message):
         await asyncio.gather(
             message.delete(),
             message.client.send_video(
-                chat_id=message.chat.id, reply_to_message_id=message_id,
+                chat_id=message.chat.id, reply_parameters=ReplyParameters(message_id=message_id),
                 video=video_file, caption=caption
             )
         )
@@ -190,7 +191,7 @@ async def video_to_audio(message: Message):
         await asyncio.gather(
             message.delete(),
             message.client.send_audio(
-                chat_id=message.chat.id, reply_to_message_id=message_id,
+                chat_id=message.chat.id, reply_parameters=ReplyParameters(message_id=message_id),
                 audio=f"{FF_MPEG_DOWN_LOAD_MEDIA_PATH}/{audio_file}",
                 caption=caption
             )
@@ -247,7 +248,7 @@ async def scale_video(message: Message):
         await asyncio.gather(
             message.delete(),
             message.client.send_video(
-                chat_id=message.chat.id, reply_to_message_id=message_id,
+                chat_id=message.chat.id, reply_parameters=ReplyParameters(message_id=message_id),
                 video=video_file, caption=caption
             )
         )
@@ -291,7 +292,7 @@ async def video_thumbnail(message: Message):
             message.delete(),
             message.client.send_photo(
                 chat_id=message.chat.id,
-                reply_to_message_id=message_id,
+                reply_parameters=ReplyParameters(message_id=message_id),
                 photo=thumbnail_file,
                 caption=replied.caption if hasattr(replied, 'media') else file_name
             )
@@ -340,7 +341,7 @@ async def video_trim(message: Message):
     dl_loc, file_name = data
     FF_MPEG_DOWN_LOAD_MEDIA_PATH.mkdir(parents=True, exist_ok=True)
     await message.edit("`Trimming media...`")
-    end_time = match.group(1) if not match.group(2) else match.group(2)
+    end_time = match.group(2) if match.group(2) else match.group(1)
     start_time = match.group(1) if match.group(1) and match.group(1) != end_time else "00:00:00"
     video_file = f"{FF_MPEG_DOWN_LOAD_MEDIA_PATH}/trimmed_{file_name}"
     start = datetime.now()
@@ -358,7 +359,7 @@ async def video_trim(message: Message):
         await asyncio.gather(
             message.delete(),
             message.client.send_video(
-                chat_id=message.chat.id, reply_to_message_id=message_id,
+                chat_id=message.chat.id, reply_parameters=ReplyParameters(message_id=message_id),
                 video=video_file, caption=caption
             )
         )
@@ -418,7 +419,7 @@ async def video_compress(message: Message):
             message.delete(),
             message.client.send_video(
                 chat_id=message.chat.id,
-                reply_to_message_id=message_id,
+                reply_parameters=ReplyParameters(message_id=message_id),
                 video=video_file, caption=caption
             )
         )

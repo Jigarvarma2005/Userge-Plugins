@@ -42,7 +42,9 @@ async def _imdb(message: Message):
     if not (imdb.API_ONE_URL or imdb.API_TWO_URL):
         return await message.err(
             "First set [these two vars](https://t.me/UsergePlugins/127) before using imdb",
-            disable_web_page_preview=True
+            link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                )
         )
     try:
         movie_name = message.input_str
@@ -76,7 +78,9 @@ async def _imdb(message: Message):
     else:
         await message.edit(
             description,
-            disable_web_page_preview=True,
+            link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ),
             parse_mode=enums.ParseMode.HTML
         )
 
@@ -212,7 +216,9 @@ if userge.has_bot:
             )
             await c_q.edit_message_text(
                 text=description,
-                disable_web_page_preview=False,
+                link_preview_options=LinkPreviewOptions(
+                    is_disabled=False
+                ),
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
@@ -261,7 +267,9 @@ if userge.has_bot:
                     input_message_content=InputTextMessageContent(
                         message_text=message_text,
                         parse_mode=enums.ParseMode.HTML,
-                        disable_web_page_preview=False
+                        link_preview_options=LinkPreviewOptions(
+                    is_disabled=False
+                )
                     ),
                     url=imdb_url,
                     description=f" {description} | {stars}",

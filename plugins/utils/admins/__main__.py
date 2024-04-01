@@ -57,4 +57,6 @@ async def mentionadmins(message: Message):
         mentions += " " + str(e) + "\n"
     await message.delete()
     await message.client.send_message(
-        chat_id=message.chat.id, text=mentions, disable_web_page_preview=True)
+        chat_id=message.chat.id, text=mentions, link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ))

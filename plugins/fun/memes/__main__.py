@@ -15,6 +15,7 @@ from random import choice, getrandbits, randint
 from re import sub
 
 from pyrogram import enums
+from pyrogram.types import ReplyParameters
 
 import requests
 import wget
@@ -359,12 +360,13 @@ async def decide_(message: Message):
         await message.client.send_animation(chat_id=chat_id,
                                             animation=path,
                                             caption=str(r["answer"]).upper(),
-                                            reply_to_message_id=message_id)
+                                            reply_parameters=ReplyParameters(message_id=message_id)
+)
     else:
         await message.client.send_photo(chat_id=chat_id,
                                         photo=path,
                                         caption=str(r["answer"]).upper(),
-                                        reply_to_message_id=message_id)
+                                        reply_parameters=ReplyParameters(message_id=message_id))
     os.remove(path)
 
 

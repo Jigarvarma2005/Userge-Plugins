@@ -57,7 +57,9 @@ async def app(message: Message):
         app_details += f"`Developer :` [{app_dev}]({app_dev_link})\n"
         app_details += f"`Rating :` {app_rating} ⭐️\n"
         app_details += f"`Features :` [View in Play Store]({app_link})"
-        await message.edit(app_details, disable_web_page_preview=False)
+        await message.edit(app_details, link_preview_options=LinkPreviewOptions(
+                    is_disabled=False
+                ))
     except IndexError:
         await message.edit("No result found in search. Please enter **Valid app name**")
     except Exception as err:

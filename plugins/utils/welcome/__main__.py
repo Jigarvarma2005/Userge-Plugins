@@ -9,6 +9,7 @@
 # All rights reserved.
 
 from userge import userge, filters, Message, get_collection
+from pyrogram.types import ReplyParameters
 
 SAVED_SETTINGS = get_collection("CONFIGS")
 WELCOME_COLLECTION = get_collection("welcome")
@@ -296,5 +297,5 @@ async def raw_say(message: Message, name, collection):
                                      message_id=found['mid'],
                                      chat_id=message.chat.id,
                                      user_id=user.id,
-                                     reply_to_message_id=message.id,
+                                     reply_parameters=ReplyParameters(message_id=message.id),
                                      del_in=WELCOME_DELETE_TIMEOUT)

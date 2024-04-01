@@ -43,7 +43,9 @@ async def savn(message: Message):
         return await message.err(
             "Before using this command, "
             "you have to set this [Environmental var.](https://t.me/UsergePlugins/128)",
-            disable_web_page_preview=True
+            link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                )
         )
     query = message.input_str
     await message.edit(f"Searching for {query} in JioSaavn...")
@@ -89,7 +91,9 @@ async def deeza(message: Message):
         return await message.err(
             "Before using this command, "
             "you have to set this [Environmental var.](https://t.me/UsergePlugins/128)",
-            disable_web_page_preview=True
+            link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                )
         )
     query = str(message.filtered_input_str)
     await message.edit(f"Searching for {query} in Deezer...")

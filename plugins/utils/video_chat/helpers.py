@@ -197,7 +197,9 @@ async def skip_song(clear_queue: bool = False):
         await Vars.CLIENT.send_message(
             Vars.CHAT_ID,
             out,
-            disable_web_page_preview=True
+            link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                )
         )
         await skip_song()
 

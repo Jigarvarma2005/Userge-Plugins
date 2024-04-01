@@ -13,6 +13,7 @@ import random
 import textwrap
 
 from PIL import Image, ImageDraw, ImageFont
+from pyrogram.types import ReplyParameters
 
 from userge import userge, Message, get_collection
 
@@ -101,7 +102,7 @@ async def sticklet(message: Message):
     image.save(image_name, "WebP")
 
     await message.client.send_sticker(
-        chat_id=message.chat.id, sticker=image_name, reply_to_message_id=reply_to)
+        chat_id=message.chat.id, sticker=image_name, reply_parameters=ReplyParameters(message_id=reply_to))
 
     # cleanup
     try:

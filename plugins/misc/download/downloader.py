@@ -18,7 +18,7 @@ from typing import Tuple, Union
 from urllib.parse import unquote_plus
 
 from pySmartDL import SmartDL
-from pyrogram.types import Message as PyroMessage
+from pyrogram.types import Message as PyroMessage, LinkPreviewOptions
 from pyrogram import enums
 
 from userge import Message, config
@@ -84,7 +84,7 @@ async def url_download(message: Message, url: str) -> Tuple[str, int]:
     downloader.start(blocking=False)
     with message.cancel_callback(downloader.stop):
         while not downloader.isFinished():
-            total_length = downloader.filesize if downloader.filesize else 0
+            total_length = downloader.filesize or 0
             downloaded = downloader.get_dl_size()
             percentage = downloader.get_progress() * 100
             speed = downloader.get_speed(human=True)
@@ -112,7 +112,9 @@ async def url_download(message: Message, url: str) -> Tuple[str, int]:
                 humanbytes(total_length),
                 speed,
                 estimated_total_time)
-            await message.edit(progress_str, disable_web_page_preview=True)
+            await message.edit(progress_str, link_preview_options=LinkPreviewOptions(
+                    is_disabled=True
+                ))
             await asyncio.sleep(config.Dynamic.EDIT_SLEEP_TIMEOUT)
     if message.process_is_canceled:
         raise ProcessCanceled

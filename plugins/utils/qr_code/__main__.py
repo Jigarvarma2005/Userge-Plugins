@@ -15,7 +15,7 @@ import os
 
 import qrcode
 from bs4 import BeautifulSoup
-
+from pyrogram.types import ReplyParameters
 from userge import userge, config, Message
 
 
@@ -29,7 +29,7 @@ async def make_qr(message: Message):
     if input_:
         text = input_
     elif replied:
-        text = input_ if input_ else replied.text
+        text = input_ or replied.text
     else:
         await message.err("```\nInput not found...```")
         return
@@ -48,7 +48,7 @@ async def make_qr(message: Message):
     await userge.send_sticker(
         message.chat.id,
         "qrcode.webp",
-        reply_to_message_id=replied.id if replied else None
+        reply_parameters=ReplyParameters(message_id=replied.id if replied else None)
     )
     os.remove("qrcode.webp")
 

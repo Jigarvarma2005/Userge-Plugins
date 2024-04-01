@@ -83,7 +83,9 @@ async def wpraip(query: str) -> List[InlineQueryResultArticle]:
                     input_message_content=InputTextMessageContent(
                         message_text=message_text,
                         parse_mode=enums.ParseMode.HTML,
-                        disable_web_page_preview=False
+                        link_preview_options=LinkPreviewOptions(
+                    is_disabled=False
+                )
                     ),
                     url=term.get("permalink"),
                     description=term.get("definition", " ")

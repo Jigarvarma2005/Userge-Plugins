@@ -15,7 +15,7 @@ from re import match
 import aiofiles
 from fake_headers import Headers
 from selenium import webdriver
-
+from pyrogram.types import ReplyParameters
 from userge import userge, Message, config
 from .. import webss
 
@@ -72,7 +72,7 @@ async def _webss(message: Message):
         message.client.send_document(chat_id=message.chat.id,
                                      document=file_path,
                                      caption=link,
-                                     reply_to_message_id=message_id)
+                                     reply_parameters=ReplyParameters(message_id=message_id))
     )
     os.remove(file_path)
     driver.quit()

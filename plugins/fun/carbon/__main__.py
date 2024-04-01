@@ -15,6 +15,7 @@ from urllib.parse import quote_plus
 
 import aiofiles
 from pyrogram.errors.exceptions.bad_request_400 import YouBlockedUser
+from pyrogram.types import ReplyParameters
 from selenium import webdriver
 
 from userge import userge, Message, config
@@ -72,7 +73,7 @@ async def carbon_(message: Message):
                 userge.send_document(chat_id=message.chat.id,
                                      document=file_id,
                                      caption='`' + caption + '`',
-                                     reply_to_message_id=replied.id if replied else None)
+                                     reply_parameters=ReplyParameters(message_id=replied.id if replied else None))
             )
     else:
         input_str = message.filtered_input_str
@@ -169,7 +170,8 @@ async def carbon_(message: Message):
             message.delete(),
             message.client.send_photo(chat_id=message.chat.id,
                                       photo=carbon_path,
-                                      reply_to_message_id=message_id)
+                                      repy_parameters=ReplyParameters(message_id=message_id)
+            )
         )
         os.remove(carbon_path)
         driver.quit()
