@@ -95,6 +95,11 @@ async def handle_mentions(msg: Message, is_retry=False):
                                 chat_id,
                                 dl_loc
                             )
+                        else:
+                            sentMedia = await media_client.send_document(
+                                chat_id,
+                                dl_loc
+                            )
                 else:
                     sentMedia = await media_client.copy_message(
                         chat_id,
